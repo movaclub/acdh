@@ -1,14 +1,28 @@
-
   <div class="container">
 	<div ng-include="" src="'/acdh/js/views/navbar.html'"></div>
   </div>
-
 <div class="container">
-  <div class="row">
 	<h4>Projects</h4>
-	<ol>
-		<li ng-repeat="pro in Model.project">{{pro['schema:headline']}} </li>
-	</ol>
+  <div class="row-fluid">
+	<div ng-repeat="pro in Model.project" class="badgerclass badger-left badger-default" data-badger="{{pro['schema:organizer'] || '\:\)'}}">
+	  <a ng-href="https://#{{pro['schema:name']}}">
+	  <div class="container-fluid">
+		<div class="col-sm-1 col-xs-1  col-lg-1">
+		  <img width="85" class="img-rounded img-responsive" ng-src="{{pro['schema:image']['src'] || 'https://dhdev.eos.arz.oeaw.ac.at/sites/default/files/styles/thumbnail/public/dha_logo.png'}}" />
+		</div>
+		<div class="col-sm-6 col-xs-6 col-lg-6">
+		<h4 class="text-warning">{{pro['schema:headline']}}</h4>
+<!-- 		<span class="pull-right">{{pro['schema:startDate'] * 1000 | date:'dd-MM-yyyy'}}</span> -->
+		</div>
+		<div class="col-sm-1 col-xs-1  col-lg-1">
+		  <a target="_blank" class="btn btn-warning" title="{{pro['schema:sameAs'][0]['title'] || '\:\)'}}" ng-href="{{pro['schema:sameAs'][0]['url'] || '\:\)'}}"><i class="fa fa-external-link fa-lg"></i></a>
+		</div>
+		<div class="col-sm-4 col-xs-4  col-lg-4">
+		  <i class="fa fa-tag fa-lg text-warning"></i> {{pro['schema:keywords'].join(', ') || 'no tags'}}
+		</div>
+	  </div><!-- container-fluid -->
+	  </a>
+	</div>
 	
   </div>
 </div>

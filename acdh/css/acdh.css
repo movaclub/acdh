@@ -1,10 +1,10 @@
-@font-face{
+/*@font-face{
   font-family:'FontAwesome';
   src:url('/acdh/fonts/fontawesome-webfont.eot")?v=3.1.1');
   src:url('/acdh/fonts/fontawesome-webfont.eot")?#iefix&v=3.1.1') format('embedded-opentype'),url('/acdh/fonts/fontawesome-webfont.woff")?v=3.1.1') format('woff'),url('/acdh/fonts/fontawesome-webfont.ttf")?v=3.1.1') format('truetype');
   font-weight:normal;
   font-style:normal;
-}
+}*/
 .row:nth-of-type(even) { background: #EEE; }
 .parent { padding: 5px 1px;}
 .child { padding: 10px 1px; border-right: 1px dotted; border-color: #CCC; padding-left:3px; }
@@ -72,3 +72,78 @@
 
 /* overall */
 .nounderline a {text-decoration: none !important;}
+
+/* menu-navbar */
+.nav-link{  color: black;
+			font-style: normal;
+			text-transform: uppercase;
+			border-top-style: solid;
+			border-top-color: white;
+}
+.nav-link:hover { 
+			border-top-style: solid;
+			border-top-color: gold;
+}
+
+/* Badger
+------------------------- */
+
+.badgerclass {
+    margin: 15px 0;
+    padding: 33px 15px 15px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, .64)
+}
+[class*="badger"] {
+    position: relative
+}
+
+[class*="badger"]:after {
+    content: attr(data-badger);
+    position: absolute;
+    top: 0;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #999;
+    color: #fff
+}
+
+.badger-left {
+    border-top-left-radius: 6px
+}
+
+.badger-right {
+    border-top-right-radius: 6px
+}
+
+.badger-left:after {
+    left: 0;
+    border-radius: 6px 0 6px 0
+}
+
+.badger-right:after {
+    right: 0;
+    border-radius: 0 6px 0 6px
+}
+
+.badger-danger:after {
+    background: #d9534f
+}
+
+.badger-warning:after {
+    background: #f0ad4e
+}
+
+.badger-success:after {
+    background: #5cb85c
+}
+
+.badger-info:after {
+    background: #5bc0de
+}
+
+.badger-inverse:after {
+    background: #222
+}

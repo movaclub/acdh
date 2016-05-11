@@ -1,14 +1,24 @@
-
   <div class="container">
 	<div ng-include="" src="'/acdh/js/views/navbar.html'"></div>
   </div>
-
 <div class="container">
-  <div class="row">
 	<h4>Know More</h4>
-	<ol>
-		<li ng-repeat="know in Model.knowmore">{{know['schema:headline']}} </li>
-	</ol>
-	
+  <div class="row-fluid">
+	<div ng-repeat="know in Model.knowmore" class="badgerclass badger-left badger-default" data-badger="{{$index+1}}">
+	  <a ng-href="https://#{{know['schema:name']}}">
+	  <div class="container-fluid">
+		<div class="col-sm-7 col-xs-7 col-lg-7">
+		<h4 class="text-warning">{{know['schema:headline']}}
+		</h4>
+		</div>
+ 		<div class="col-sm-1 col-xs-1 col-lg-1">
+		  <a target="_blank" class="btn btn-warning" title="{{know['title_field'] || '\:\)'}}" ng-href="{{know['schema:sameAs'] || '\:\)'}}"><i class="fa fa-external-link fa-lg"></i></a>
+ 		</div>
+ 		<div class="col-sm-4 col-xs-4 col-lg-4">
+		  <i class="fa fa-tag fa-lg text-warning"></i> {{know['schema:keywords'].join(', ') || 'no tags'}}
+ 		</div> 
+	  </div><!-- container-fluid -->
+	  </a>
+	</div>	
   </div>
 </div>
