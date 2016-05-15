@@ -5,7 +5,7 @@
 	<h4>Know More</h4>
   <div class="row-fluid">
 	<div ng-repeat="know in Model.knowmore" class="badgerclass badger-left badger-default" data-badger="{{$index+1}}">
-	  <a ng-href="https://#{{know['schema:name']}}">
+	  <a ui-sref="s-knowmore({nID:{{know['schema:name'].replace('dha:','')}}})">
 	  <div class="container-fluid">
 		<div class="col-sm-7 col-xs-7 col-lg-7">
 		<h4 class="text-warning">{{know['schema:headline']}}

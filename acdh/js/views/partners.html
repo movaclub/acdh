@@ -6,7 +6,7 @@
 	<h4>Partners</h4>
   <div class="row-fluid">
 	<div ng-repeat="pa in Model.partners | findPartner:'schema:keywords'" class="badgerclass badger-left badger-default" data-badger="{{$index+1}}">
-	  <a ng-href="https://#{{pa['schema:name']}}">
+	  <a ui-sref="s-partners({nID:{{pa['schema:name'].replace('dha:','')}}})">
 	  <div class="container-fluid">
 		<div class="col-sm-1 col-xs-1  col-lg-1">
 		  <img width="85" class="img-rounded img-responsive" ng-src="{{pa['schema:thumbnailUrl']['src'] || 'https://dhdev.eos.arz.oeaw.ac.at/sites/default/files/styles/thumbnail/public/dha_logo.png'}}" />

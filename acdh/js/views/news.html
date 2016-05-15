@@ -5,7 +5,7 @@
 	<h4>News & Events</h4>
   <div class="row-fluid">
 	<div ng-repeat="ev in Model.news" class="badgerclass badger-left badger-default" data-badger="{{ev['schema:location'] || '\:\)'}}">
-	  <a ng-href="https://#{{ev['schema:name']}}">
+	  <a ui-sref="s-news({nID:{{ev['schema:name'].replace('dha:','')}}})">
 	  <div class="container-fluid">
 		<div class="col-sm-1 col-xs-1  col-lg-1">
 		  <img width="85" class="img-rounded img-responsive" ng-src="{{ev['schema:thumbnailUrl']['src'] || 'https://dhdev.eos.arz.oeaw.ac.at/sites/default/files/styles/thumbnail/public/dha_logo.png'}}" />

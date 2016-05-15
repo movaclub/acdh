@@ -7,14 +7,27 @@
 		'news':		'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=event&pagesize=all&callback=JSON_CALLBACK',		// news & events
 		'knowmore':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=biblio&pagesize=all&callback=JSON_CALLBACK',	// know more
 		'project':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=project&pagesize=all&callback=JSON_CALLBACK',	// projects
-		'partners':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=institution&pagesize=all&callback=JSON_CALLBACK'// partners (have in 'schema:keywords' the tag 'Partner')
+		'partners':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=institution&pagesize=all&callback=JSON_CALLBACK',// partners (have in 'schema:keywords' the tag 'Partner')
+		'single':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?callback=JSON_CALLBACK&parameters[nid]='
 	};
+	app.filter('unsafe', function($sce) { return $sce.trustAsHtml; });
+	app.controller('singleCtrl',['$scope','$http', '$stateParams', function($scope, $http, $stateParams){
+	  var thisURL = listURL['single'] + $stateParams.nID;// console.log('nID: ', $stateParams.nID);
+	  $http({
+		  method : "GET",
+		  url : thisURL
+	  }).then(function mySucces(res) {
+		  $scope.mySingle = res.data; //console.log('$scope.mySingle: ', $scope.mySingle);
+	  }, function myError(res) {
+		  $scope.mySingle = res.statusText;
+	  });
+	}]);
 
 	app.controller('listCtrl',['$scope','$http', '$state', 'getLists', function($scope, $http, $state, getLists){
 	  $scope.Model = {};
 	  var getListPromise = getLists.getListPromise($state.current.name);
 	  getListPromise.then(
-		function(res){ $scope.Model[$state.current.name] = res.data;  console.log($state.current.name + ' $scope.Model: ', $scope.Model); },
+		function(res){ $scope.Model[$state.current.name] = res.data;  /* console.log($state.current.name + ' $scope.Model: ', $scope.Model); */ },
 		function(err){ console.log('err: ', err); }
 	  );
 	}]);
@@ -47,10 +60,45 @@
 		};
 	});
 	function config($stateProvider, $urlRouterProvider, $locationProvider, $compileProvider){
-// 		$locationProvider.html5Mode(true).hashPrefix('!');
 		$compileProvider.debugInfoEnabled(true);
 		$urlRouterProvider.otherwise('/');
 	    $stateProvider
+	    .state('s-news',{ // partyDetail({ partyID: id, partyLocation: location })
+	        url: '/s-news/:nID',
+	        views: {
+	            'content@': {
+	                templateUrl: '/acdh/js/views/s-news.html',
+					controller: 'singleCtrl'
+	            }
+	        }
+	    })
+	    .state('s-project',{
+	        url: '/s-project/:nID',
+	        views: {
+	            'content@': {
+	                templateUrl: '/acdh/js/views/s-project.html',
+					controller: 'singleCtrl'
+	            }
+	        }
+	    })
+	    .state('s-knowmore',{
+	        url: '/s-knowmore/:nID',
+	        views: {
+	            'content@': {
+	                templateUrl: '/acdh/js/views/s-knowmore.html',
+					controller: 'singleCtrl'
+	            }
+	        }
+	    })
+	    .state('s-partners',{
+	        url: '/s-partners/:nID',
+	        views: {
+	            'content@': {
+	                templateUrl: '/acdh/js/views/s-partners.html',
+					controller: 'singleCtrl'
+	            }
+	        }
+	    })
 	    .state('news',{
 	        url: '/news',
 	        views: {
@@ -61,26 +109,20 @@
 	        }
 	    })
 	    .state('project',{
-	        url: '^/project',
+	        url: '/project',
 	        views: {
 	            'content@': {
 	                templateUrl: '/acdh/js/views/project.html',
-					controller: 'listCtrl'/*,
-					resolve:{
-					  'myList':function(getLists){return getLists.promise;}
-					}*/
+					controller: 'listCtrl'
 	            }
 	        }
 	    })
 	    .state('knowmore',{
-	        url: '^/knowmore',
+	        url: '/knowmore',
 	        views: {
 	            'content@': {
 	                templateUrl: '/acdh/js/views/knowmore.html',
-					controller: 'listCtrl'/*,
-					resolve:{
-					  'myList':function(getLists){return getLists.promise;}
-					}*/
+					controller: 'listCtrl'
 	            }
 	        }
 	    })
@@ -89,10 +131,7 @@
 	        views: {
 	            'content@': {
 	                templateUrl: '/acdh/js/views/partners.html',
-					controller: 'listCtrl'/*,
-					resolve:{
-					  'myList':function(getLists){return getLists.promise;}
-					}*/
+					controller: 'listCtrl'
 	            }
 	        }
 	    })

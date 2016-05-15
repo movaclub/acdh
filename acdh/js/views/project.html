@@ -5,7 +5,7 @@
 	<h4>Projects</h4>
   <div class="row-fluid">
 	<div ng-repeat="pro in Model.project" class="badgerclass badger-left badger-default" data-badger="{{pro['schema:organizer'] || '\:\)'}}">
-	  <a ng-href="https://#{{pro['schema:name']}}">
+	  <a ui-sref="s-project({nID:{{pro['schema:name'].replace('dha:','')}}})">
 	  <div class="container-fluid">
 		<div class="col-sm-1 col-xs-1  col-lg-1">
 		  <img width="85" class="img-rounded img-responsive" ng-src="{{pro['schema:image']['src'] || 'https://dhdev.eos.arz.oeaw.ac.at/sites/default/files/styles/thumbnail/public/dha_logo.png'}}" />
