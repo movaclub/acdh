@@ -25,11 +25,22 @@
 
 	app.controller('listCtrl',['$scope','$http', '$state', 'getLists', function($scope, $http, $state, getLists){
 	  $scope.Model = {};
+	  $scope.uiview = {};
+	  $scope.uiview.list = false;
+	  $scope.uiview.grid = true;
 	  var getListPromise = getLists.getListPromise($state.current.name);
 	  getListPromise.then(
 		function(res){ $scope.Model[$state.current.name] = res.data;  /* console.log($state.current.name + ' $scope.Model: ', $scope.Model); */ },
 		function(err){ console.log('err: ', err); }
 	  );
+	  $scope.onList = function(){
+		$scope.uiview.list = true;
+		$scope.uiview.grid = false;  console.log('$scope.uiview: ', $scope.uiview);
+	  };
+	  $scope.onGrid = function(){
+		$scope.uiview.list = false;
+		$scope.uiview.grid = true;  console.log('$scope.uiview: ', $scope.uiview);
+	  };
 	}]);
 	app.service('getLists', ['$http', '$q', function($http, $q){
 	  var deferObject,
