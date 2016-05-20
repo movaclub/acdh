@@ -7,14 +7,14 @@
 	<div ng-repeat="know in Model.knowmore" class="badgerclass badger-left badger-default" data-badger="{{$index+1}}">
 	  <a ui-sref="s-knowmore({nID:{{know['schema:name'].replace('dha:','')}}})">
 	  <div class="container-fluid">
-		<div class="col-sm-7 col-xs-7 col-lg-7">
+		<div class="col-sm-6 col-xs-6 col-md-7 col-lg-7">
 		<h4 class="text-warning">{{know['schema:headline']}}
 		</h4>
 		</div>
- 		<div class="col-sm-1 col-xs-1 col-lg-1">
+ 		<div class="col-sm-2 col-xs-2 col-md-1 col-lg-1">
 		  <a target="_blank" class="btn btn-warning" title="{{know['title_field'] || '\:\)'}}" ng-href="{{know['schema:sameAs'] || '\:\)'}}"><i class="fa fa-external-link fa-lg"></i></a>
  		</div>
- 		<div class="col-sm-4 col-xs-4 col-lg-4">
+ 		<div class="col-sm-4 col-xs-4 col-md-4 col-lg-4">
 		  <i class="fa fa-tag fa-lg text-warning"></i> {{know['schema:keywords'].join(', ') || 'no tags'}}
  		</div> 
 	  </div><!-- container-fluid -->
@@ -22,7 +22,7 @@
 	</div>	
   </div>
   <div class="row-fluid" ng-show="uiview.grid">
-    <div class="col-lg-3 col-sm-3 col-xs-1" ng-repeat="know in Model.knowmore">
+    <div class="col-xs-8 col-sm-3 col-md-3 col-lg-2" ng-repeat="know in Model.knowmore">
 		  <div class="offer offer-radius offer-warning" style="min-height:205px;">
 			  <a target="_blank" class="btn btn-warning pull-right" title="{{know['title_field'] || '\:\)'}}" ng-href="{{know['schema:sameAs'] || '\:\)'}}"><i class="fa fa-external-link"></i></a>
 			<a ui-sref="s-knowmore({nID:{{know['schema:name'].replace('dha:','')}}})">
