@@ -4,20 +4,53 @@
 	var app = angular.module('acdh', ['ui.router','ngSanitize']);
 	app.config(config);
 	var listURL = {
-		'news':		'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=event&pagesize=all&callback=JSON_CALLBACK',		// news & events
-		'knowmore':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=biblio&pagesize=all&callback=JSON_CALLBACK',	// know more
-		'project':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=project&pagesize=all&callback=JSON_CALLBACK',	// projects
-		'partners':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=institution&pagesize=all&callback=JSON_CALLBACK',// partners (have in 'schema:keywords' the tag 'Partner')
-		'single':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?callback=JSON_CALLBACK&parameters[nid]='
+		'newsevents':	'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=event&pagesize=all&callback=JSON_CALLBACK',		// news & events
+		'knowmore':		'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=biblio&pagesize=all&callback=JSON_CALLBACK',	// know more
+		'projects':		'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=project&pagesize=all&callback=JSON_CALLBACK',	// projects
+		'partners':		'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?parameters[type]=institution&pagesize=all&callback=JSON_CALLBACK',// partners (in 'schema:keywords' tag 'Partner')
+		'single':		'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?callback=JSON_CALLBACK&parameters[nid]=',
+		'start':		'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?callback=JSON_CALLBACK&parameters[field_tags]=214', // inc. front page entries
+		'contact': 		'https://dhdev.eos.arz.oeaw.ac.at/en/api_0_1/nodes?callback=JSON_CALLBACK&parameters[nid]=165'
 	};
 	app.filter('unsafe', function($sce) { return $sce.trustAsHtml; });
-	app.controller('singleCtrl',['$scope','$http', '$stateParams', function($scope, $http, $stateParams){
+	app.controller('acdhNav',['$scope', '$http', 'getMenu', function($scope, $http, getMenu){
+	  $scope.Model = {};
+	  var getMenuPromise = getMenu.getMenuPromise(listURL['start']);
+	  getMenuPromise.then(
+		function(res){
+		  for(var i=0; i<res.data.length; i++){
+			if( res.data[i].hasOwnProperty('schema:headline') ){
+			  res.data[i]['headline'] = res.data[i]['schema:headline'];
+			  res.data[i]['schema:headline'] = res.data[i]['schema:headline'].replace(/[&]+/g, '');
+			  res.data[i]['description'] = res.data[i]['schema:description'];
+			  res.data[i]['description'] = res.data[i]['description'].replace(/<[^<>]+>/gm, '');
+			  res.data[i]['description'] = res.data[i]['description'].substring(0,55);
+			  res.data[i]['description'] = res.data[i]['description'] + '...';
+			}
+		  }
+		  $scope.Model['start'] = res.data;
+		},
+		function(err){ console.log('err acdhNav: ', err); }
+	  );
+	}]);
+	app.controller('contactCtrl',['$scope','$http', '$stateParams' , function($scope, $http){
+	  var thisURL = listURL['contact'];
+	  $http({
+		  method : "GET",
+		  url : thisURL
+	  }).then(function mySucces(res) {
+		  $scope.mySingle = res.data;
+	  }, function myError(res) {
+		  $scope.mySingle = res.statusText;
+	  });
+	}]);
+	app.controller('singleCtrl',['$scope','$http', '$stateParams' , function($scope, $http, $stateParams){
 	  var thisURL = listURL['single'] + $stateParams.nID;// console.log('nID: ', $stateParams.nID);
 	  $http({
 		  method : "GET",
 		  url : thisURL
 	  }).then(function mySucces(res) {
-		  $scope.mySingle = res.data; //console.log('$scope.mySingle: ', $scope.mySingle);
+		  $scope.mySingle = res.data;
 	  }, function myError(res) {
 		  $scope.mySingle = res.statusText;
 	  });
@@ -30,16 +63,16 @@
 	  $scope.uiview.grid = true;
 	  var getListPromise = getLists.getListPromise($state.current.name);
 	  getListPromise.then(
-		function(res){ $scope.Model[$state.current.name] = res.data;  /* console.log($state.current.name + ' $scope.Model: ', $scope.Model); */ },
+		function(res){ $scope.Model[$state.current.name] = res.data;   console.log($state.current.name + ' $scope.Model: ', $scope.Model);  },
 		function(err){ console.log('err: ', err); }
 	  );
 	  $scope.onList = function(){
 		$scope.uiview.list = true;
-		$scope.uiview.grid = false;  console.log('$scope.uiview: ', $scope.uiview);
+		$scope.uiview.grid = false;  //console.log('$scope.uiview: ', $scope.uiview);
 	  };
 	  $scope.onGrid = function(){
 		$scope.uiview.list = false;
-		$scope.uiview.grid = true;  console.log('$scope.uiview: ', $scope.uiview);
+		$scope.uiview.grid = true;  //console.log('$scope.uiview: ', $scope.uiview);
 	  };
 	}]);
 	app.service('getLists', ['$http', '$q', function($http, $q){
@@ -59,7 +92,34 @@
 	  };
 	  return getList;
 	}]);
-	app.filter('findPartner', function() { // for Partner's section (only)
+	app.service('getMenu', ['$http', '$q', function($http, $q){
+	  var deferObject,
+	  getMenu = {
+		getMenuPromise: function(url){
+		  var promise = $http.get(url);
+		  deferObject =  deferObject || $q.defer();
+		  deferObject =  $q.defer();
+		  promise.then(
+			function(resp){ deferObject.resolve(resp); /*console.log('resp getMenu: ', resp);*/ },
+			function(errr){ deferObject.reject(errr); console.log('errr getMenu: ', errr); }
+		  );
+		  return deferObject.promise;
+		}
+	  };
+	  return getMenu;
+	}]);
+	app.filter('findContact', function() { // for contact's section
+	  return function(items, field) {
+			var result = [];
+			angular.forEach(items, function(value) {
+				if (value.hasOwnProperty('schema:headline') && value['schema:headline'] == 'Contact') {
+					result.push(value); console.log('findContact result: ',result);
+				}
+			});
+			return result;
+		};
+	});
+	app.filter('findPartner', function() { // for Partner's section
 	  return function(items, field) {
 			var result = [];
 			angular.forEach(items, function(value) {
@@ -70,8 +130,31 @@
 			return result;
 		};
 	});
-	function config($stateProvider, $urlRouterProvider, $locationProvider, $compileProvider){
+	app.filter('findMenu', function() { // for menu
+	  return function(items, field) {
+			var result = [];
+			angular.forEach(items, function(value) {
+				if (value.hasOwnProperty('schema:keywords') && value['schema:keywords'].indexOf('_menu') != -1) {
+					result.push(value);
+				}
+			});
+			return result;
+		};
+	});
+	app.filter('startMenu', function() { // for start page
+	  return function(items, field) {
+			var result = [];
+			angular.forEach(items, function(value) {
+				if (value.hasOwnProperty('schema:keywords') && value['schema:keywords'].indexOf('_start') != -1) {
+					result.push(value);
+				}
+			});
+			return result;
+		};
+	});
+	function config($stateProvider, $urlRouterProvider, $locationProvider, $compileProvider,$logProvider){
 		$compileProvider.debugInfoEnabled(true);
+		$logProvider.debugEnabled(true);
 		$urlRouterProvider.otherwise('/');
 	    $stateProvider
 	    .state('s-news',{ // partyDetail({ partyID: id, partyLocation: location })
@@ -110,8 +193,8 @@
 	            }
 	        }
 	    })
-	    .state('news',{
-	        url: '/news',
+	    .state('newsevents',{
+	        url: '/newsevents',
 	        views: {
 	            'content@': {
 	                templateUrl: '/acdh/js/views/news.html',
@@ -119,8 +202,8 @@
 	            }
 	        }
 	    })
-	    .state('project',{
-	        url: '/project',
+	    .state('projects',{
+	        url: '/projects',
 	        views: {
 	            'content@': {
 	                templateUrl: '/acdh/js/views/project.html',
@@ -150,7 +233,8 @@
 	        url: '/contact',
 	        views: {
 	            'content@': {
-	                templateUrl: '/acdh/js/views/contact.html'
+	                templateUrl: '/acdh/js/views/contact.html',
+					controller: 'contactCtrl'
 	            }
 	        }
 	    })
@@ -158,7 +242,8 @@
 	        url: '/',
 	        views: {
 	            'content@': {
-	                templateUrl: '/acdh/js/views/start.html'
+	                templateUrl: '/acdh/js/views/start.html',
+					controller: 'listCtrl'
 	            }
 	        }
 	    });

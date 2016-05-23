@@ -4,7 +4,7 @@
 <div class="container">
 	<h4>Projects<i style="font-size:0.75em;cursor: pointer; cursor: hand;" ng-click="onList()" class="fa fa-list pull-right text-warning" aria-hidden="true"></i><i style="font-size:0.75em;cursor: pointer; cursor: hand;" ng-click="onGrid()" class="fa fa-th pull-right text-warning" aria-hidden="true"></i></h4>
   <div class="row-fluid" ng-show="uiview.list">
-	<div ng-repeat="pro in Model.project" class="badgerclass badger-left badger-default" data-badger="{{pro['schema:organizer'] || '\:\)'}}">
+	<div ng-repeat="pro in Model.projects" class="badgerclass badger-left badger-default" data-badger="{{pro['schema:organizer'] || '\:\)'}}">
 	  <a ui-sref="s-project({nID:{{pro['schema:name'].replace('dha:','')}}})">
 	  <div class="container-fluid">
 		<div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
@@ -26,7 +26,7 @@
 	
   </div>
   <div class="row-fluid" ng-show="uiview.grid">
-    <div class="col-xs-8 col-sm-3 col-md-3 col-lg-2" ng-repeat="pro in Model.project">
+    <div class="col-xs-8 col-sm-3 col-md-3 col-lg-2" ng-repeat="pro in Model.projects">
 		  <div class="offer offer-radius offer-warning" style="min-height:205px;">
 			  <a target="_blank" class="btn btn-warning pull-right pull-top" title="{{pro['schema:sameAs'][0]['title'] || '\:\)'}}" ng-href="{{pro['schema:sameAs'][0]['url'] || '\:\)'}}"><i class="fa fa-external-link"></i></a>
 			<a ui-sref="s-project({nID:{{pro['schema:name'].replace('dha:','')}}})">
