@@ -27,6 +27,10 @@
 			  res.data[i]['description'] = res.data[i]['description'].substring(0,55);
 			  res.data[i]['description'] = res.data[i]['description'] + '...';
 			}
+			if( res.data[i].hasOwnProperty('schema:primaryImageOfPage') ){
+			  res.data[i]['schema:primaryImageOfPage'] = res.data[i]['schema:primaryImageOfPage'].replace(/^[^:]+:/, '');
+			  res.data[i]['schema:primaryImageOfPage'] = res.data[i]['schema:primaryImageOfPage'].replace('-', '_');
+			}
 		  }
 		  $scope.Model['start'] = res.data;
 		},
