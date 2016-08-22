@@ -1,11 +1,23 @@
-<div class="container" style="padding:5px;">
-  <a ui-sref="start"><img width="85" src="http://www.digital-humanities.at/components/dha-custom/lowres_logo_1.png" /></a>
-  
-<nav class="navbar pull-right" ng-controller="acdhNav">
-  <ul class="nav navbar-nav">
-    <li class="nav-item" ng-repeat="me in Model.start | findMenu:'schema:keywords' | orderBy:'api_order'">
-      <a class="nav-link" ui-sref="{{me['schema:headline'].split(' ').join('') | lowercase}}"><i class="material-icons text-center" style="font-size:.93em;">{{me["schema:primaryImageOfPage"]}}</i> {{me['headline']}}</a>
-    </li>
-  </ul>
-</nav>
+<div flex layout="column" layout-md="column" layout-xs="column" layout-sm="column">
+    <md-toolbar style="background-color:inherit;margin-top:15px;margin-bottom:15px;" ng-cloak>
+      <div class="md-toolbar-tools">
+         <a ui-sref="start" aria-label="Start Page"><img style="height:79px;" src="http://www.digital-humanities.at/components/dha-custom/lowres_logo_1.png" /></a>
+        <span flex="auto"></span>
+		<md-button md-colors="{color: 'primary-500'}" ui-sref="{{me['schema:headline'] | lowercase}}" class="md-button md-raised md-ink-ripple" aria-label="$state.current.name" ng-repeat="me in Model.navbar | orderBy:'api_order'">
+		  <md-icon  md-colors="{color: 'primary-800'}" aria-label="{{me["schema:primaryImageOfPage"]}}">{{me["schema:primaryImageOfPage"]}}</md-icon> {{me['headline']}}
+		</md-button>
+		  <md-button class="md-icon-button md-button md-raised" ng-click="uiview.list=true;uiview.grid=false;" type="button" aria-label="List View" title="List View">
+			<i md-colors="{color: 'primary-400'}" class="material-icons">&#xE896;</i><div class="md-ripple-container"></div>
+		  </md-button>
+		  <md-button class="md-icon-button md-button md-raised" ng-click="uiview.list=false;uiview.grid=true;" type="button" aria-label="Grid View" title="Grid View">
+			<i md-colors="{color: 'primary-400'}" class="material-icons">&#xE8F0;</i><div class="md-ripple-container"></div>
+		  </md-button>
+		  <md-button class="md-icon-button md-button md-raised" ng-click="toggleLang('en');toggleNavLang('en');" type="button" aria-label="EN" title="EN" md-colors="{color: 'primary-600'}">
+			EN<div class="md-ripple-container"></div>
+		  </md-button>
+		  <md-button class="md-icon-button md-button md-raised" ng-click="toggleLang('de');toggleNavLang('de');" type="button" aria-label="DE" title="DE" md-colors="{color: 'primary-600'}">
+			DE<div class="md-ripple-container"></div>
+		  </md-button>
+      </div>
+    </md-toolbar>
 </div>

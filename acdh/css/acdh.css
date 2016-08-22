@@ -1,174 +1,193 @@
-/*@font-face{
-  font-family:'FontAwesome';
-  src:url('/acdh/fonts/fontawesome-webfont.eot")?v=3.1.1');
-  src:url('/acdh/fonts/fontawesome-webfont.eot")?#iefix&v=3.1.1') format('embedded-opentype'),url('/acdh/fonts/fontawesome-webfont.woff")?v=3.1.1') format('woff'),url('/acdh/fonts/fontawesome-webfont.ttf")?v=3.1.1') format('truetype');
-  font-weight:normal;
-  font-style:normal;
-}*/
-.row:nth-of-type(even) { background: #EEE; }
-.parent { padding: 5px 1px;}
-.child { padding: 10px 1px; border-right: 1px dotted; border-color: #CCC; padding-left:3px; }
-
-/* add a little bottom space under the images */
-.thumbnail {
-	margin-bottom:7px;
+/******** App-Wide Fonts *********/
+.md-body-2, .md-subhead, .md-list-item-text p {
+  font-size: 15px!important;
+  font-weight: 300!important;
+  letter-spacing: -.012em!important;
+  color: rgba(0,0,0,0.95)!important;
 }
 
-/* blocks */
-.shape{	
-	border-style: solid; border-width: 0 70px 40px 0; float:right; height: 0px; width: 0px;
-	-ms-transform:rotate(360deg); /* IE 9 */
-	-o-transform: rotate(360deg);  /* Opera 10.5 */
-	-webkit-transform:rotate(360deg); /* Safari and Chrome */
-	transform:rotate(360deg);
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-rendering: optimizeLegibility!important
 }
-.offer{
-	background:#fff; border:1px solid #ddd; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); margin: 15px 0; overflow:hidden;
+a {
+    text-decoration: none!important;
+    font-size: 14px!important;
+    font-weight: 500!important;
+    letter-spacing: .018em!important
 }
-.offer-radius{
-	border-radius:7px;
+h1 {
+    font-size: 45px!important;
+    letter-spacing: -.018em!important
 }
-.offer-danger {	border-color: #d9534f; }
-.offer-danger .shape{
-	border-color: transparent #d9534f transparent transparent;
-	border-color: rgba(255,255,255,0) #d9534f rgba(255,255,255,0) rgba(255,255,255,0);
+h2 {
+    font-size: 18px!important;
+    letter-spacing: 0!important;
+    margin: 8px 0!important
 }
-.offer-success {	border-color: #5cb85c; }
-.offer-success .shape{
-	border-color: transparent #5cb85c transparent transparent;
-	border-color: rgba(255,255,255,0) #5cb85c rgba(255,255,255,0) rgba(255,255,255,0);
+h3, .md-list-item-text h3 {
+    font-size: 20px!important;
+    font-weight: 300!important;
+    letter-spacing: -.032em!important;
+    line-height: 2pc!important;
 }
-.offer-default {	border-color: #999999; }
-.offer-default .shape{
-	border-color: transparent #999999 transparent transparent;
-	border-color: rgba(255,255,255,0) #999999 rgba(255,255,255,0) rgba(255,255,255,0);
-}
-.offer-primary {	border-color: #428bca; }
-.offer-primary .shape{
-	border-color: transparent #428bca transparent transparent;
-	border-color: rgba(255,255,255,0) #428bca rgba(255,255,255,0) rgba(255,255,255,0);
-}
-.offer-info {	border-color: #5bc0de; }
-.offer-info .shape{
-	border-color: transparent #5bc0de transparent transparent;
-	border-color: rgba(255,255,255,0) #5bc0de rgba(255,255,255,0) rgba(255,255,255,0);
-}
-.offer-warning {	border-color: #f0ad4e; }
-.offer-warning .shape{
-	border-color: transparent #f0ad4e transparent transparent;
-	border-color: rgba(255,255,255,0) #f0ad4e rgba(255,255,255,0) rgba(255,255,255,0);
+h4 {
+    font-size: 1pc!important
 }
 
-.shape-text{
-	color:#fff; font-size:12px; font-weight:bold; position:relative; right:-40px; top:2px; white-space: nowrap;
-	-ms-transform:rotate(30deg); /* IE 9 */
-	-o-transform: rotate(360deg);  /* Opera 10.5 */
-	-webkit-transform:rotate(30deg); /* Safari and Chrome */
-	transform:rotate(30deg);
-}	
-.offer-content{
-	padding:0 20px 10px;
+
+
+/******** navigation elements *********/
+.navbar{
+
 }
 
-/* overall */
-.nounderline a {text-decoration: none !important;}
+.sidenav {
 
-/* menu-navbar */
-.nav-link{  color: black;
-			font-style: normal;
-			text-transform: uppercase;
-			border-top-style: solid;
-			border-top-color: white;
-}
-.nav-link:hover { 
-			border-top-style: solid;
-			border-top-color: gold;
 }
 
-/* Badger
-------------------------- */
-
-.badgerclass {
-    margin: 15px 0;
-    padding: 33px 15px 15px;
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, .64)
-}
-[class*="badger"] {
-    position: relative
+md-icon.sidenav {
+  margin: 0px;
 }
 
-[class*="badger"]:after {
-    content: attr(data-badger);
-    position: absolute;
-    top: 0;
-    padding: 3px 7px;
-    font-size: 12px;
-    font-weight: bold;
-    background: #999;
-    color: #fff
+md-icon.caption {
+  
 }
 
-.badger-left {
-    border-top-left-radius: 6px
+/******** layout elements - splashpage *********/
+.splashtile {
+  margin: 8px;
+  padding: 8px;
+  height: 250px;
+  width: 220px;
+}
+.splashtext {
+  height: 80px;
+  overflow: hidden;
+}
+.splashhead {
+  height: 20px;
+  overflow: hidden;
 }
 
-.badger-right {
-    border-top-right-radius: 6px
+.tile {
+  margin: 8px;
+  padding: 8px;
+  height: 220px;
+  width: 220px;
 }
 
-.badger-left:after {
-    left: 0;
-    border-radius: 6px 0 6px 0
+/******** layout elements - projects page *********/
+.projecttile {
+  width: 320px;
+  padding: 0px;
 }
 
-.badger-right:after {
-    right: 0;
-    border-radius: 0 6px 0 6px
+.projectline {
+  padding: 0px;
 }
 
-.badger-danger:after {
-    background: #d9534f
+/******** spinentry animation class - to be replaced by ngAnimate + transitions? *********/
+.spinentry{
+  -webkit-animation: spinentry 0.4s forwards; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: spinentry 0.4s forwards; /* Firefox < 16 */
+  -ms-animation: spinentry 0.4s forwards; /* Internet Explorer */
+  -o-animation: spinentry 0.4s forwards; /* Opera < 12.1 */
+  animation: spinentry 0.4s forwards;
+  transform: rotateY(90deg); /* setting initial value to animation startpoint - FF bugfix */
 }
 
-.badger-warning:after {
-    background: #f0ad4e
+@keyframes spinentry {
+    from { transform: rotateY(90deg); }
+    to   { transform: rotateY(0deg);}
 }
 
-.badger-success:after {
-    background: #5cb85c
+/* Firefox < 16 */
+@-moz-keyframes spinentry {
+    from { transform: rotateY(90deg);}
+    to   { transform: rotateY(0deg);}
 }
 
-.badger-info:after {
-    background: #5bc0de
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes spinentry {
+    from { transform: rotateY(90deg);}
+    to   { transform: rotateY(0deg);}
 }
 
-.badger-inverse:after {
-    background: #222
+/* Internet Explorer */
+@-ms-keyframes spinentry {
+    from { transform: rotateY(90deg);}
+    to   { transform: rotateY(0deg);}
 }
 
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 48px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
+/* Opera < 12.1 */
+@-o-keyframes spinentry {
+    from { transform: rotateY(90deg);}
+    to   { transform: rotateY(0deg);}
+}
 
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
 
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
+/******** layout elements - knowmore page *********/
+ md-grid-list {
+  margin: 8px; }
+ .gray {
+  background: #f5f5f5; }
+ .green {
+  background: #b9f6ca; }
+ .yellow {
+  background: #ffff8d; }
+ .blue {
+  background: #84ffff; }
+ .purple {
+  background: #b388ff; }
+ .red {
+  background: #ff8a80; }
+ md-grid-tile {
+  transition: all 200ms ease-out; 
+}
 
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+/******** Containers *********/
+.contentcontainer {
+  width: calc(100% - 30px);
+  max-width: 1400px;
+  margin: 0 auto;  
+}
+
+.actioncontainer {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1132px) {
+    .contentcontainer {
+        max-width: 880px;
+    }
+}
+@media (min-width: 912px) {
+    .sidenav {
+        display: none;
+    }
+}
+@media (max-width: 912px) {
+    .contentcontainer {
+        max-width: 700px;
+    }
+    .navbar {
+        display: none;
+    }
+}
+@media (max-width: 692px) {
+    .contentcontainer {
+        max-width: 440px;
+    }
+    .projecttile {
+        width: calc(100% - 16px);
+    }
+    .desctext {
+      display: none;
+    }
 }

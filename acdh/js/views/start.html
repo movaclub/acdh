@@ -1,22 +1,10 @@
-<div class="container text-center">
-  <img style="padding:69px;" src="http://www.digital-humanities.at/components/dha-custom/lowres_logo_1.png" />
-</div>
-
-<div class="container" ng-controller="acdhNav">
-  <div class="row">
-    <div class="col-lg-3 col-sm-3 col-xs-3" ng-repeat="me in Model.start | startMenu:'schema:keywords' | orderBy:'api_order'">
-        <a ui-sref="{{me['schema:headline'].split(' ').join('') | lowercase}}">
-		  <div class="offer offer-radius offer-warning">
-			  <div class="shape">
-				  <div class="shape-text"></div>
-			  </div>
-			  <div class="offer-content text-center text-warning">
-				  <i class="material-icons text-center">{{me["schema:primaryImageOfPage"]}}</i>
-				  <h4>{{me['headline']}}</h4>
-				  <p class="text-left" style="border-top: dotted 1px;">{{me['description']}}</p>
-			  </div>
-		  </div>
-        </a>
-    </div>
-  </div>
+<div layout="row" layout-xs="column" layout-align="center start">
+	<img style="transform: scale(0.33);" src="http://dha.eos.arz.oeaw.ac.at/components/dha-custom/highres_logo.png" />
+</div> 
+<div layout="row" layout-xs="column" layout-align="center center" ng-cloak style="min-height: 5px">
+    <md-card md-colors="{color: 'primary-800'}" class="spinentry md-whiteframe-11dp splashtile md-button md-ink-ripple" layout="column" layout-align="center center" ng-repeat="me in Model.start | orderBy:'api_order'" ui-sref="{{me['schema:headline'].split(' ').join('') | lowercase}}" ng-style="dynStyle" ng-init="dynStyle={'animation-delay':$index/10 + 's'}">
+	  <md-icon md-colors="{color: 'primary-800'}" style="font-size: 50px; width: 50px; height: 50px;" aria-label="{{me["schema:primaryImageOfPage"]}}">{{me["schema:primaryImageOfPage"]}}</md-icon>
+		<div class="md-headline" style="margin: auto;text-align:center;" layout-align="center start"> {{me['schema:headline']}}</div>
+		  <md-card-content><p style="font-weight:normal;font-size:9px;"><md-divider></md-divider>{{me['schema:description']}}<md-divider></md-divider></p></md-card-content>
+    </md-card>
 </div>
