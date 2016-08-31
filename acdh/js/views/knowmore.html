@@ -1,9 +1,5 @@
-	<div flex layout="row">
-	  <div flex="10"></div> 
-	  <div flex="80">
-		<navbar></navbar>	
 		  <md-content ng-if="uiview.list">
-			<md-card layout="row" ui-sref="s-knowmore({nID:{{know['schema:name'].replace('dha:','')}}})" class="md-3-line md-ink-ripple md-raised" ng-repeat="know in Model.knowmore" flex>
+			<md-card layout="row" ui-sref="dha.s-knowmore({nID:'{{know['schema:name']}}',lang:'{{curlang}}'})" class="md-3-line md-ink-ripple md-raised" ng-repeat="know in Model.knowmore" flex>
 					<div flex="10"><img height="auto" width="auto" ng-src="{{know['schema:thumbnailUrl']['src'] || 'https://dhdev.eos.arz.oeaw.ac.at/sites/default/files/styles/thumbnail/public/dha_logo.png'}}" /></div>
 					<div flex="5"></div>
 					<div flex="70" layout-align="start center">
@@ -15,7 +11,7 @@
 		</md-content>    
 		<md-content ng-if="uiview.grid">
 				<div class='md-padding' layout="row" layout-wrap>
-				  <md-card ui-sref="s-knowmore({nID:{{know['schema:name'].replace('dha:','')}}})" style="width:275px;" ng-repeat="know in Model.knowmore">
+				  <md-card ui-sref="dha.s-knowmore({nID:'{{know['schema:name']}}',lang:'{{curlang}}'})" style="width:275px;" ng-repeat="know in Model.knowmore">
 					<md-card-content>
 					<img height="55px" ng-src="{{know['schema:thumbnailUrl']['src'] || 'https://dhdev.eos.arz.oeaw.ac.at/sites/default/files/styles/thumbnail/public/dha_logo.png'}}" alt="{{know['schema:headline']}}" />
 					  <h4 md-colors="{color: 'primary-500'}">{{know['schema:headline']}}</h4>
@@ -27,6 +23,3 @@
 				  </md-card>
 				</div>
 		</md-content>
-	  </div>
-	  <div flex="10"></div>
-	 </div>

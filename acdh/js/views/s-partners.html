@@ -1,10 +1,6 @@
-	<div flex layout="row">
-	  <div flex="10"></div> 
-	  <div flex="80">
-		<navbar></navbar>
 		<md-content>
 				<div class='md-padding' layout="row" layout-wrap>
-				  <md-card style="width:inherit;" ng-repeat="pa in mySingle">
+				  <md-card style="width:100%;" ng-repeat="pa in mySingle">
 					<md-card-content>
 					<img height="75px" ng-src="{{pa['schema:image']['src'] || 'https://dhdev.eos.arz.oeaw.ac.at/sites/default/files/dha_logo.png'}}" />
 					  <h4 md-colors="{color: 'primary-500'}">{{pa['schema:legalName']}}</h4>
@@ -16,6 +12,3 @@
 				  </md-card>
 				</div>
 		</md-content>
-	  </div>
-	  <div flex="10"></div>
-	 </div>
