@@ -59,9 +59,18 @@
   app.controller('newsCtrl',['$rootScope','$scope','$http', '$state', 'getList', '$stateParams', function($rootScope, $scope, $http, $state, getList, $stateParams){
 	if(typeof($stateParams.lang) !== 'undefined'){$scope.curlang = $stateParams.lang;}
 	if(typeof($scope.Model) == 'undefined'){$scope.Model = {};}
-	$rootScope.uiview = {};
-	$rootScope.uiview.list = true;
-	$rootScope.uiview.grid = false;
+	
+	$rootScope.toggleLang = function(lang){
+	  $scope.curlang = lang;
+	  $stateParams.lang = lang;
+	  $state.transitionTo($state.current, $stateParams, { reload: true, inherit: true, notify: true });
+	};
+	
+	if(typeof($rootScope.uiview) == 'undefined'){
+	  $rootScope.uiview = {};
+	  $rootScope.uiview.list = true;
+	  $rootScope.uiview.grid = false;
+	}
 
 	$rootScope.onList = function(){
 	  $rootScope.uiview.list = true;
@@ -124,9 +133,18 @@
   app.controller('partnerCtrl',['$rootScope','$scope','$http', '$state', 'getList', '$stateParams', function($rootScope, $scope, $http, $state, getList, $stateParams){
 	if(typeof($stateParams.lang) !== 'undefined'){$scope.curlang = $stateParams.lang;}
 	if(typeof($scope.Model) == 'undefined'){$scope.Model = {};}
-	$rootScope.uiview = {};
-	$rootScope.uiview.list = true;
-	$rootScope.uiview.grid = false;
+	
+	$rootScope.toggleLang = function(lang){
+	  $scope.curlang = lang;
+	  $stateParams.lang = lang;
+	  $state.transitionTo($state.current, $stateParams, { reload: true, inherit: true, notify: true });
+	};
+	
+	if(typeof($rootScope.uiview) == 'undefined'){
+	  $rootScope.uiview = {};
+	  $rootScope.uiview.list = true;
+	  $rootScope.uiview.grid = false;
+	}
 
 	$rootScope.onList = function(){
 	  $rootScope.uiview.list = true;
@@ -170,9 +188,18 @@
   app.controller('knowmoreCtrl',['$rootScope','$scope','$http', '$state', 'getList', '$stateParams', function($rootScope, $scope, $http, $state, getList, $stateParams){
 	if(typeof($stateParams.lang) !== 'undefined'){$scope.curlang = $stateParams.lang;}
 	if(typeof($scope.Model) == 'undefined'){$scope.Model = {};}
-	$rootScope.uiview = {};
-	$rootScope.uiview.list = true;
-	$rootScope.uiview.grid = false;
+	
+	$rootScope.toggleLang = function(lang){
+	  $scope.curlang = lang;
+	  $stateParams.lang = lang;
+	  $state.transitionTo($state.current, $stateParams, { reload: true, inherit: true, notify: true });
+	};
+	
+	if(typeof($rootScope.uiview) == 'undefined'){
+	  $rootScope.uiview = {};
+	  $rootScope.uiview.list = true;
+	  $rootScope.uiview.grid = false;
+	}
 
 	$rootScope.onList = function(){
 	  $rootScope.uiview.list = true;
@@ -236,9 +263,18 @@
   app.controller('projectCtrl',['$rootScope','$scope','$http', '$state', 'getList', '$stateParams', function($rootScope, $scope, $http, $state, getList, $stateParams){
 	if(typeof($stateParams.lang) !== 'undefined'){$scope.curlang = $stateParams.lang;}
 	if(typeof($scope.Model) == 'undefined'){$scope.Model = {};}
-	$rootScope.uiview = {};
-	$rootScope.uiview.list = true;
-	$rootScope.uiview.grid = false;
+	
+	$rootScope.toggleLang = function(lang){
+	  $scope.curlang = lang;
+	  $stateParams.lang = lang;
+	  $state.transitionTo($state.current, $stateParams, { reload: true, inherit: true, notify: true });
+	};
+	
+	if(typeof($rootScope.uiview) == 'undefined'){
+	  $rootScope.uiview = {};
+	  $rootScope.uiview.list = true;
+	  $rootScope.uiview.grid = false;
+	}
 
 	$rootScope.onList = function(){
 	  $rootScope.uiview.list = true;
@@ -302,6 +338,13 @@
   app.controller('contactCtrl',['$rootScope','$scope','$http', '$state', 'getList', '$stateParams', function($rootScope, $scope, $http, $state, getList, $stateParams){
 	if(typeof($stateParams.lang) !== 'undefined'){$scope.curlang = $stateParams.lang;}
 	if(typeof($scope.Model) == 'undefined'){$scope.Model = {};}
+	
+	$rootScope.toggleLang = function(lang){
+	  $scope.curlang = lang;
+	  $stateParams.lang = lang;
+	  $state.transitionTo($state.current, $stateParams, { reload: true, inherit: true, notify: true });
+	};
+	
 	var curList = getList.list('contact');
 	curList.then(
 		function(res){ var tags = [];
